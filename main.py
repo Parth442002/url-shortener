@@ -5,11 +5,9 @@ from fastapi.responses import RedirectResponse
 from starlette.datastructures import URL
 
 import secrets
-from . import schemas
-from . import models, schemas
-from .database import SessionLocal, engine
-from . import crud, models, schemas
-from .config import get_settings
+from Api import crud,keygen,models,schemas
+from Api.database import SessionLocal,engine
+from Api.config import get_settings
 
 app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
@@ -86,3 +84,7 @@ def delete_url(
         return {"detail": message}
     else:
         raise_not_found(request)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
