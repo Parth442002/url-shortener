@@ -1,0 +1,17 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull Image from Docker Hub
+        run: sudo docker pull parth404/shortner:1.0
+      - name: Delete Old Container
+        run: sudo docker rm -f shortner-container || true
+      - name: Run Docker Container
+        run: sudo docker run -d -p 8000:8000 --name shortner-container parth404/shortner:1.0
