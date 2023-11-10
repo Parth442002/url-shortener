@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Pull Image from Docker Hub
+      - name: Pull Image from Docker Hub and proceed
         run: sudo docker pull parth404/shortner:1.0
       - name: Delete Old Container
         run: sudo docker rm -f shortner-container || true
